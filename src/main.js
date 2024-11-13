@@ -1,34 +1,29 @@
 'use strict';
-import { fetchImages } from './pixabay-api.js';
-import { renderImages } from './render-functions.js';
-import SimpleLightbox from 'simplelightbox';
+import { fetchImages } from '../src/js/pixabay-api.js';
+import { renderImages } from '../src/js/render-functions.js';
 
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-import 'css-loader/dist/css-loader.min.css';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
+
 let lightbox;
 
-const showLoader = () => {
-  document.querySelector('.loader').classList.add('visible');
-};
-
-const hideLoader = () => {
-  document.querySelector('.loader').classList.remove('visible');
-};
+const showLoader = () => loader.classList.add('visible');
+const hideLoader = () => loader.classList.remove('visible');
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
-
   const query = event.currentTarget.elements.query.value.trim();
+
   if (!query) {
+    iziToast.warning({ message: 'Please enter a search term!' });
     return;
   }
 
   showLoader();
+
   try {
     const images = await fetchImages(query);
     renderImages(images);

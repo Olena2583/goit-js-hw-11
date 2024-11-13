@@ -8,7 +8,19 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
+    <div class="container">
+      <header>
+        <form class="search-form" id="search-form">
+          <input type="text" name="query" placeholder="Search images..." required>
+          <button type="submit">Search</button>
+        </form>
+      </header>
+      <section class="gallery-container">
+        <div class="gallery" id="gallery"></div>
+      </section>
+      <div class="loader" id="loader"></div>
+    </div>
+    <!-- <load src="./partials/header.html" icon-path="img/sprite.svg#logo" /> -->
 
     <main>
       <!-- Loads the specified .html file -->
@@ -19,5 +31,5 @@
     <load src="./partials/footer.html" />
 
     <script type="module" src="./main.js"></script>
-  </body>
+   
 </html>
